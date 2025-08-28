@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const posts = await getCollection("posts");
+---
+
+<MainLayout title="Alberto Pintado - Software Engineer">
+  {posts.map((post) => <a href={`/blog/${post.id}`}>{post.data.title}</a>)}
+</MainLayout>

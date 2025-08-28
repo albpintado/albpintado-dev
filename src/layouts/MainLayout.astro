@@ -1,0 +1,56 @@
+---
+import Navbar from "../components/Navbar.astro";
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar title="Alberto Pintado" />
+    <main class="content">
+      <slot />
+    </main>
+    <footer><p>Alberto Pintado - <span id="copyright"></span></p></footer>
+  </body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100dvh;
+      width: 100dvw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      flex-grow: 1;
+      margin: 0 1rem;
+    }
+
+    footer {
+      margin: 0 1rem 0.5rem;
+      text-align: center;
+    }
+  </style>
+</html>
+
+<script>
+  const copyright = document.getElementById("copyright");
+
+  if (copyright) {
+    copyright.innerHTML = new Date().getFullYear() + "";
+  }
+</script>

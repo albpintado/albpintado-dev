@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import MainLayout from "./MainLayout.astro";
+
+const { frontmatter } = Astro.props;
+const publishedDate = new Date(frontmatter.publishedDate)
+  .toLocaleString()
+  .split(",")[0];
+
+const tags = frontmatter.tags.join(", ");
+---
+
+<MainLayout title="Alberto Pintado - Blog">
+  <article>
+    <h2>{frontmatter.title}</h2>
+    {
+      frontmatter.image.url && (
+        <Image
+          src={frontmatter.image.url}
+          alt="Astro cover image"
+          style="width: 100%; height: auto"
+        />
+      )
+    }
+    <p id="author">By {frontmatter.author}</p>
+    <small>Published at: {publishedDate}</small>
+    <p>
+      Tags: {
+        frontmatter.tags.map((tag: string) => <span class="tag">{tag}</span>)
+      }
+    </p>
+    <slot />
+  </article>
+</MainLayout>
+
+<style>
+  #author {
+    margin: 0;
+  }
+
+  .tag {
+    background-color: #e1e1e1;
+    margin: 0 0.125rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+  }
+</style>
